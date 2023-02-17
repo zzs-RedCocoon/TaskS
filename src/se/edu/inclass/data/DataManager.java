@@ -7,22 +7,20 @@ import se.edu.inclass.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DataManager {
     private File dataFile;
 
-    public File getDataFile() {
-        return dataFile;
-    }
-
     public DataManager(String fileName) {
         dataFile = new File(fileName);
+    }
+
+    public File getDataFile() {
+        return dataFile;
     }
 
     public void createFile() {
@@ -67,10 +65,8 @@ public class DataManager {
     private ArrayList<Task> parse(ArrayList<String> dataItems) {
         ArrayList<Task> allTasks = new ArrayList<>();
         for (String line : dataItems) {
-            String taskType = line.substring(0, 2);
-            String taskDescription = line.substring(4);
-            taskType = taskType.replace("[", "");
-            taskType = taskType.replace("]", "");
+            String taskType = getTaskType(line);
+            String taskDescription = getTaskDescription(line);
             switch (taskType) {
             case "T":
                 Todo todo = new Todo(taskDescription);
@@ -90,5 +86,17 @@ public class DataManager {
             }
         }
         return allTasks;
+    }
+
+    private String getTaskDescription(String line) {
+        String taskDescription = line.substring(4);
+        return taskDescription;
+    }
+
+    private String getTaskType(String line) {
+        String taskType = line.substring(0, 2);
+        taskType = taskType.replace("[", "");
+        taskType = taskType.replace("]", "");
+        return taskType;
     }
 }
