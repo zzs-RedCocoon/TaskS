@@ -9,6 +9,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
+import static java.util.stream.Collectors.toList;
+
 public class Main {
 
     private TaskNameComparator taskNameComparator;
@@ -30,6 +32,8 @@ public class Main {
 //        printDataUsingStreams(tasksData);
         printDeadlinesUsingStream(tasksData);
 
+        ArrayList<Task> filteredList = filterTaskListUsingStreams(tasksData,"11");
+        printData(filteredList);
     }
 
     private static int countDeadlines(ArrayList<Task> tasksData) {
@@ -74,6 +78,15 @@ public class Main {
         System.out.println("Print deadline using streams");
         tasks.stream()
                 .filter(t ->t instanceof Deadline)  //filter takes a predicate
+                .sorted((a,b)->a.getDescription().compareToIgnoreCase(b.getDescription()))
                 .forEach(System.out::println);
+    }
+
+    public static ArrayList<Task>filterTaskListUsingStreams(ArrayList<Task>tasksData, String filterString){
+        ArrayList<Task> filteredList = (ArrayList<Task>) tasksData.stream()
+                .filter(t->t.getDescription().contains(filterString))
+                .collect(toList());
+
+        return filteredList;
     }
 }
