@@ -1,14 +1,14 @@
 package se.edu.inclass.task;
 
-public class ToDo extends Task {
+public class Todo extends Task {
 
-    public ToDo(String description) {
+    public Todo(String description) {
         this.description = description;
     }
 
     @Override
     public String toString() {
-        return "{ToDo: " + description + '}';
+        return "{Todo: " + description + '}';
     }
 
 }

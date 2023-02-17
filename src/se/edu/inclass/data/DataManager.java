@@ -3,7 +3,7 @@ package se.edu.inclass.data;
 import se.edu.inclass.task.Deadline;
 import se.edu.inclass.task.Event;
 import se.edu.inclass.task.Task;
-import se.edu.inclass.task.ToDo;
+import se.edu.inclass.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -73,7 +73,7 @@ public class DataManager {
             taskType = taskType.replace("]", "");
             switch (taskType) {
             case "T":
-                ToDo todo = new ToDo(taskDescription);
+                Todo todo = new Todo(taskDescription);
                 allTasks.add(todo);
                 break;
             case "D":
